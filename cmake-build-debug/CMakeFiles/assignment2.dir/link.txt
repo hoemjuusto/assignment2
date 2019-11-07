@@ -1,1 +1,1 @@
-/usr/bin/cc  -pthread -g   CMakeFiles/assignment2.dir/main.c.o  -o assignment2 
+/usr/bin/cc  -pthread -g   CMakeFiles/assignment2.dir/main.c.o CMakeFiles/assignment2.dir/queue.c.o CMakeFiles/assignment2.dir/miscellanous.c.o  -o assignment2 

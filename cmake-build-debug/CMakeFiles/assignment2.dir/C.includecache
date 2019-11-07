@@ -13,4 +13,22 @@ stdlib.h
 -
 pthread.h
 -
+values.h
+-
+string.h
+-
+queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
+miscellanous.h
+/home/juuso/CLionProjects/assignment2/miscellanous.h
+
+/home/juuso/CLionProjects/assignment2/miscellanous.c
+miscellanous.h
+/home/juuso/CLionProjects/assignment2/miscellanous.h
+
+/home/juuso/CLionProjects/assignment2/miscellanous.h
+stddef.h
+-
+
+/home/juuso/CLionProjects/assignment2/queue.h
 

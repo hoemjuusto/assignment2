@@ -150,6 +150,60 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/main.c.s
 .PHONY : main.c.s
 
+miscellanous.o: miscellanous.c.o
+
+.PHONY : miscellanous.o
+
+# target to build an object file
+miscellanous.c.o:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/miscellanous.c.o
+.PHONY : miscellanous.c.o
+
+miscellanous.i: miscellanous.c.i
+
+.PHONY : miscellanous.i
+
+# target to preprocess a source file
+miscellanous.c.i:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/miscellanous.c.i
+.PHONY : miscellanous.c.i
+
+miscellanous.s: miscellanous.c.s
+
+.PHONY : miscellanous.s
+
+# target to generate assembly for a file
+miscellanous.c.s:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/miscellanous.c.s
+.PHONY : miscellanous.c.s
+
+queue.o: queue.c.o
+
+.PHONY : queue.o
+
+# target to build an object file
+queue.c.o:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/queue.c.o
+.PHONY : queue.c.o
+
+queue.i: queue.c.i
+
+.PHONY : queue.i
+
+# target to preprocess a source file
+queue.c.i:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/queue.c.i
+.PHONY : queue.c.i
+
+queue.s: queue.c.s
+
+.PHONY : queue.s
+
+# target to generate assembly for a file
+queue.c.s:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/queue.c.s
+.PHONY : queue.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +216,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... miscellanous.o"
+	@echo "... miscellanous.i"
+	@echo "... miscellanous.s"
+	@echo "... queue.o"
+	@echo "... queue.i"
+	@echo "... queue.s"
 .PHONY : help
 
 

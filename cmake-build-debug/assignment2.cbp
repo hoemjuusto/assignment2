@@ -81,6 +81,18 @@
 		<Unit filename="/home/juuso/CLionProjects/assignment2/main.c">
 			<Option target="assignment2"/>
 		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/miscellanous.c">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/miscellanous.h">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/queue.c">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/queue.h">
+			<Option target="assignment2"/>
+		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/assignment2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
