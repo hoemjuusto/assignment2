@@ -3,10 +3,11 @@
 #include <pthread.h>
 #include <values.h>
 #include <string.h>
+#include <unistd.h>
 #include "queue.h"
 #include "miscellanous.h"
 
-#define SERVERS 7  // my desktop has 4 cores and can handle 2 threads/core, so max would be 8 (7 servers + 1 master thread)
+#define SERVERS 3  // my desktop has 4 cores and can handle 2 threads/core, so max would be 8 (6 servers + 1 master thread + 1 main)
 
 // Getting the mutex
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -16,10 +17,9 @@ pthread_cond_t dataNotProduced =
 pthread_cond_t dataNotConsumed =
         PTHREAD_COND_INITIALIZER;
 
-int queue_lengths[SERVERS];  // global variable that just holds the queue lengths of individual servers (threads)
-// when creating queue, in my implementation the first member of queue has to be empty
+int keepRunning = 1;
 struct Queue **server_queues;  // array of server queues
-int server_queue_lengths[SERVERS];
+
 void *server_function(void *arg);  // prototype, implementation in the end
 void *entry_function(void *arg);  // prototype, implementation in the end
 
@@ -67,51 +67,51 @@ void *server_function(void *arg){
     static char empty[1] = "\0";
     struct Queue my_queue = {empty, NULL, 0};
     server_queues[my_id] = &my_queue;
-    server_queue_lengths[my_id] = my_queue.size;
     char buffer[100];
-    int keepRunning = 1;
 
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
-            if(dequeue(&my_queue, buffer) == 1){
-                printf("Server with id %d handled request %s successfully!\n", my_id, buffer);
-            } else{
-                fprintf(stderr, "Error handling request!\n");
+            // do processing
+            sleep(3);  // for demonstration purposes
+
+
+            if(dequeue(&my_queue, buffer) != 1)
+                fprintf(stderr, "Server %d having error handling request!\n", *(int*) arg);
             }
 
         }
-    }
-
-
-
-
     pthread_exit(0);
 }
+
 
 
 void *entry_function(void *arg){
 
     printf("Master thread launched!\n\n");
 
-    static int keepRunning = 1;
-
     char input[MAX_INPUT];
     char buffer[100];
+    char param[10];
 
     while(keepRunning){
-        printf("Give serve-request (submit with enter, c to close the bank):\n\n");
-        fgets(input, MAX_INPUT, stdin);
-        if(strcmp(input,"c\n") == 0)
+        printf("Give serve-request (submit with enter, c to close the bank):\n");
+        scanf("%s %s", input, param);
+        if(strcmp(input,"c") == 0)
         {
             printf("Closing the bank!\n\n");
             keepRunning = 0;
         }else{
             int min_length; int min_index;
-            min(server_queue_lengths, &min_length, &min_index);
+            min(server_queues, &min_length, &min_index);
+            pthread_mutex_lock(&mutex);
             if(enqueue(server_queues[min_index], input) == 0){
-                fprintf(stderr, "Error with directing the server request!\n");
+                fprintf(stderr, "Error with directing the request %s to server!\n", input);
             }
+            /*for(int i=0; i<SERVERS; i++){
+                printf("Server %d queue length: %d\n", i, server_queues[i]->size);
+            }*/
+            pthread_mutex_unlock(&mutex);
         }
     }
 

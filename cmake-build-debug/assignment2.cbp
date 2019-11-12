@@ -78,6 +78,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/account.c">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/account.h">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/bank.c">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/bank.h">
+			<Option target="assignment2"/>
+		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/assignment2/main.c">
 			<Option target="assignment2"/>
 		</Unit>
@@ -91,6 +103,12 @@
 			<Option target="assignment2"/>
 		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/assignment2/queue.h">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/server.c">
+			<Option target="assignment2"/>
+		</Unit>
+		<Unit filename="/home/juuso/CLionProjects/assignment2/server.h">
 			<Option target="assignment2"/>
 		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/assignment2/CMakeLists.txt">

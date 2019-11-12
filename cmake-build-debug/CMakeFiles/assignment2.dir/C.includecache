@@ -17,18 +17,18 @@ values.h
 -
 string.h
 -
+unistd.h
+-
 queue.h
 /home/juuso/CLionProjects/assignment2/queue.h
-miscellanous.h
-/home/juuso/CLionProjects/assignment2/miscellanous.h
-
-/home/juuso/CLionProjects/assignment2/miscellanous.c
 miscellanous.h
 /home/juuso/CLionProjects/assignment2/miscellanous.h
 
 /home/juuso/CLionProjects/assignment2/miscellanous.h
 stddef.h
 -
+queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 
 /home/juuso/CLionProjects/assignment2/queue.h
 

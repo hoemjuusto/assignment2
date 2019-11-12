@@ -6,8 +6,8 @@
 #define ASSIGNMENT2_QUEUE_H
 
 struct Queue {
-    char *request;  // Name of queue member (dynamically allocated)
-    struct Queue *next;  // (pointer to next queue member)
+    char *request;  // server-request (dynamically allocated)
+    struct Queue *next;  // (pointer to next request in queue)
     int size;
 };
 

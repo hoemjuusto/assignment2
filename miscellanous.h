@@ -6,7 +6,9 @@
 #define ASSIGNMENT2_MISCELLANOUS_H
 
 #include <stddef.h>
+#include "queue.h"
+void min(struct Queue **sqs, int *min_value, int *min_index);
 
-void min(const int *array, int *min_value, int *min_index);
+int process(struct Queue *q);
 
 #endif //ASSIGNMENT2_MISCELLANOUS_H
