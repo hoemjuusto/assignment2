@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/juuso/CLionProjects/assignment2test/account.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/account.c.o"
-  "/home/juuso/CLionProjects/assignment2test/bank.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/bank.c.o"
-  "/home/juuso/CLionProjects/assignment2test/main.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/main.c.o"
-  "/home/juuso/CLionProjects/assignment2test/miscellanous.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/miscellanous.c.o"
-  "/home/juuso/CLionProjects/assignment2test/queue.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/queue.c.o"
-  "/home/juuso/CLionProjects/assignment2test/server.c" "/home/juuso/CLionProjects/assignment2test/cmake-build-debug/CMakeFiles/assignment2.dir/server.c.o"
+  "/home/juuso/CLionProjects/as2t/account.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/account.c.o"
+  "/home/juuso/CLionProjects/as2t/bank.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/bank.c.o"
+  "/home/juuso/CLionProjects/as2t/main.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/main.c.o"
+  "/home/juuso/CLionProjects/as2t/miscellanous.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/miscellanous.c.o"
+  "/home/juuso/CLionProjects/as2t/queue.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/queue.c.o"
+  "/home/juuso/CLionProjects/as2t/server.c" "/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles/assignment2.dir/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

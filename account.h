@@ -4,7 +4,7 @@
 
 #ifndef ASSIGNMENT2_ACCOUNT_H
 #define ASSIGNMENT2_ACCOUNT_H
-
+#define MAX_ID 50
 struct Account {
     int id;
     float balance;

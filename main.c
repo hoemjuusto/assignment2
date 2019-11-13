@@ -99,13 +99,13 @@ void *entry_function(void *arg){
     char input[MAX_INPUT];
 
     while(keepRunning){
-        printf("Give serve-request (submit with enter, c to close the bank):\n");
+        printf("Give serve-request (submit with enter, e to exit):\n");
         fgets(input, MAX_INPUT, stdin);
         char delim[] = "\n";
         strcpy(input, strtok(input, delim));
         printf("You gave request: %s\n", input);
 
-        if(strcmp(input,"c") == 0)
+        if(strcmp(input,"e") == 0)
         {
             printf("Closing the bank!\n\n");
             keepRunning = 0;
