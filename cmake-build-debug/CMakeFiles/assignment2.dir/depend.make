@@ -4,9 +4,15 @@
 CMakeFiles/assignment2.dir/account.c.o: ../account.c
 CMakeFiles/assignment2.dir/account.c.o: ../account.h
 
+CMakeFiles/assignment2.dir/bank.c.o: ../bank.c
+CMakeFiles/assignment2.dir/bank.c.o: ../bank.h
+
+CMakeFiles/assignment2.dir/main.c.o: ../account.h
+CMakeFiles/assignment2.dir/main.c.o: ../bank.h
 CMakeFiles/assignment2.dir/main.c.o: ../main.c
 CMakeFiles/assignment2.dir/main.c.o: ../miscellanous.h
 CMakeFiles/assignment2.dir/main.c.o: ../queue.h
+CMakeFiles/assignment2.dir/main.c.o: ../server.h
 
 CMakeFiles/assignment2.dir/miscellanous.c.o: ../miscellanous.c
 CMakeFiles/assignment2.dir/miscellanous.c.o: ../miscellanous.h
@@ -14,4 +20,11 @@ CMakeFiles/assignment2.dir/miscellanous.c.o: ../queue.h
 
 CMakeFiles/assignment2.dir/queue.c.o: ../queue.c
 CMakeFiles/assignment2.dir/queue.c.o: ../queue.h
+
+CMakeFiles/assignment2.dir/server.c.o: ../account.h
+CMakeFiles/assignment2.dir/server.c.o: ../bank.h
+CMakeFiles/assignment2.dir/server.c.o: ../miscellanous.h
+CMakeFiles/assignment2.dir/server.c.o: ../queue.h
+CMakeFiles/assignment2.dir/server.c.o: ../server.c
+CMakeFiles/assignment2.dir/server.c.o: ../server.h
 

@@ -8,7 +8,4 @@
 #include <stddef.h>
 #include "queue.h"
 void min(struct Queue **sqs, int *min_value, int *min_index);
-
-int process(struct Queue *q);
-
 #endif //ASSIGNMENT2_MISCELLANOUS_H

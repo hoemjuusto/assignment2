@@ -6,8 +6,10 @@
 #include <unistd.h>
 #include "queue.h"
 #include "miscellanous.h"
+#include "server.h"
+#include "account.h"
 
-#define SERVERS 3  // my desktop has 4 cores and can handle 2 threads/core, so max would be 8 (6 servers + 1 master thread + 1 main)
+#define SERVERS 4  // my desktop has 4 cores and can handle 2 threads/core, so max would be 8 (6 servers + 1 master thread + 1 main)
 
 // Getting the mutex
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -19,6 +21,7 @@ pthread_cond_t dataNotConsumed =
 
 int keepRunning = 1;
 struct Queue **server_queues;  // array of server queues
+struct Bank bank = {.balance = 0, NULL};
 
 void *server_function(void *arg);  // prototype, implementation in the end
 void *entry_function(void *arg);  // prototype, implementation in the end
@@ -65,22 +68,25 @@ void *server_function(void *arg){
 
     int my_id = *(int*) arg;
     static char empty[1] = "\0";
-    struct Queue my_queue = {empty, NULL, 0};
+    struct Queue my_queue = {empty, NULL, 0};  // in my queue implementation first member is empty
+
+    pthread_mutex_lock(&mutex);
     server_queues[my_id] = &my_queue;
-    char buffer[100];
+    pthread_mutex_unlock(&mutex);
+
+    char request[100];
 
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
-            // do processing
             sleep(3);  // for demonstration purposes
-
-
-            if(dequeue(&my_queue, buffer) != 1)
-                fprintf(stderr, "Server %d having error handling request!\n", *(int*) arg);
+            if(dequeue(&my_queue, request) != 1) {
+                fprintf(stderr, "Server %d having error handling request!\n", *(int *) arg);
             }
-
+            // do processing
+            process(request, bank);
         }
+    }
     pthread_exit(0);
 }
 
@@ -91,12 +97,14 @@ void *entry_function(void *arg){
     printf("Master thread launched!\n\n");
 
     char input[MAX_INPUT];
-    char buffer[100];
-    char param[10];
 
     while(keepRunning){
         printf("Give serve-request (submit with enter, c to close the bank):\n");
-        scanf("%s %s", input, param);
+        fgets(input, MAX_INPUT, stdin);
+        char delim[] = "\n";
+        strcpy(input, strtok(input, delim));
+        printf("You gave request: %s\n", input);
+
         if(strcmp(input,"c") == 0)
         {
             printf("Closing the bank!\n\n");

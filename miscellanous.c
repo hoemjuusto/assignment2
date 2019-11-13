@@ -28,31 +28,3 @@ void min(struct Queue **sqs, int *min_value, int *min_index){
     *min_index = index;
 }
 
-int process(struct Queue *q){
-
-    char cmd[5];
-    char arg[50];
-    int ac1;
-    int ac2;
-    float sum;
-    fprintf(stdin, "%s", q->request);
-    fscanf(stdin, "%s %s", cmd, arg);
-    if(strcmp(cmd, "l")==0){
-        fprintf(stdin, "%s", arg);
-        fscanf(stdin, "%d", ac1);
-
-    }
-    if(strcmp(cmd, "t")==0){
-        fprintf(stdin, "%s", arg);
-        fscanf(stdin, "%s %s %f", ac1, ac2, sum);
-    }
-    if(strcmp(cmd, "w")==0){
-
-    }
-    if(strcmp(cmd, "d")==0){
-
-    }
-
-
-    return 1;
-}

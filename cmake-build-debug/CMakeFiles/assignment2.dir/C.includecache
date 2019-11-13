@@ -6,7 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/juuso/CLionProjects/assignment2/main.c
+/home/juuso/CLionProjects/assignment2test/account.h
+
+/home/juuso/CLionProjects/assignment2test/bank.h
+
+/home/juuso/CLionProjects/assignment2test/miscellanous.h
+stddef.h
+-
+queue.h
+/home/juuso/CLionProjects/assignment2test/queue.h
+
+/home/juuso/CLionProjects/assignment2test/queue.h
+
+/home/juuso/CLionProjects/assignment2test/server.c
 stdio.h
 -
 stdlib.h
@@ -20,15 +32,19 @@ string.h
 unistd.h
 -
 queue.h
-/home/juuso/CLionProjects/assignment2/queue.h
+/home/juuso/CLionProjects/assignment2test/queue.h
 miscellanous.h
-/home/juuso/CLionProjects/assignment2/miscellanous.h
-
-/home/juuso/CLionProjects/assignment2/miscellanous.h
+/home/juuso/CLionProjects/assignment2test/miscellanous.h
 stddef.h
 -
-queue.h
-/home/juuso/CLionProjects/assignment2/queue.h
+server.h
+/home/juuso/CLionProjects/assignment2test/server.h
+account.h
+/home/juuso/CLionProjects/assignment2test/account.h
 
-/home/juuso/CLionProjects/assignment2/queue.h
+/home/juuso/CLionProjects/assignment2test/server.h
+queue.h
+/home/juuso/CLionProjects/assignment2test/queue.h
+bank.h
+/home/juuso/CLionProjects/assignment2test/bank.h
 

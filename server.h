@@ -1,4 +1,4 @@
-//
+// Server-side functions
 // Created by juuso on 12.11.2019.
 //
 #include "queue.h"
@@ -6,10 +6,5 @@
 
 #ifndef ASSIGNMENT2_SERVER_H
 #define ASSIGNMENT2_SERVER_H
-struct Server{
-    int id;
-    struct Queue *queue;
-    struct Bank *bank;
-};
-int account_exists(struct Bank bank, int id);
+int process(char request[MAX_INPUT], struct Bank bank);
 #endif //ASSIGNMENT2_SERVER_H

@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/juuso/CLionProjects/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/juuso/CLionProjects/assignment2test/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/juuso/CLionProjects/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/juuso/CLionProjects/assignment2test/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="assignment2">
-				<Option output="/home/juuso/CLionProjects/assignment2/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/juuso/CLionProjects/assignment2/cmake-build-debug"/>
+				<Option output="/home/juuso/CLionProjects/assignment2test/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/juuso/CLionProjects/assignment2test/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -41,15 +41,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="assignment2/fast">
-				<Option output="/home/juuso/CLionProjects/assignment2/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/juuso/CLionProjects/assignment2/cmake-build-debug"/>
+				<Option output="/home/juuso/CLionProjects/assignment2test/cmake-build-debug/assignment2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/juuso/CLionProjects/assignment2test/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -61,57 +61,57 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 assignment2/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/juuso/CLionProjects/assignment2/cmake-build-debug"/>
+				<Option working_dir="/home/juuso/CLionProjects/assignment2test/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/juuso/CLionProjects/assignment2test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/account.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/account.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/account.h">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/account.h">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/bank.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/bank.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/bank.h">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/bank.h">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/main.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/main.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/miscellanous.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/miscellanous.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/miscellanous.h">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/miscellanous.h">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/queue.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/queue.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/queue.h">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/queue.h">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/server.c">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/server.c">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/server.h">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/server.h">
 			<Option target="assignment2"/>
 		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/assignment2/CMakeLists.txt">
+		<Unit filename="/home/juuso/CLionProjects/assignment2test/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
