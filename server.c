@@ -15,50 +15,52 @@
 
 
 
-static int account_exists(struct Bank bank, int id){
-    if(bank.accounts!=NULL) {
-        int size = sizeof(bank.accounts) / sizeof(struct Account *);
-        printf("size: %d\n", id);
-        for (int i = 0; i < size; i++) {
-            if (bank.accounts[i]->id == id) {
-                return i;
-            }
+static int account_exists(struct Bank *bank, char *id){
+    for (int i = 0; bank->accounts[i] != NULL; i++) {
+        if (strcmp(bank->accounts[i]->id, id) == 0) {
+            return i;
         }
     }
     return -1;
 }
 
-int create_account(struct Bank *bank, int id, float init_balance){
-    if(account_exists(*bank, id)){
-        printf("Account with id %d already exists!", id);
+int create_account(struct Bank *bank, char *id, float init_balance){
+    if(account_exists(bank, id) != -1){
+        printf("Account with id %s already exists!\n", id);
         return -1;
     }
-    int size = sizeof(bank->accounts)/sizeof(struct Account *);
-    struct Account new_account = {id, 0, init_balance};
-    bank->accounts = realloc(bank->accounts, sizeof(bank->accounts) + sizeof(struct Account *));
+    int size = 0;
+    for (int i = 0; bank->accounts[i] != NULL; i++){
+        size = i;
+    }
+
+    struct Account new_account = {*id, init_balance};
+    bank->accounts = realloc(bank->accounts, sizeof(struct Account *)*(size + 1));
     if(bank->accounts == NULL){
-        fprintf(stderr, "Failed to reallocate when creating new account!");
+        fprintf(stderr, "Failed to reallocate when creating new account!\n");
         return -1;
     }
     bank->accounts[size] = &new_account;
-    printf("New account with id: %d created!\n", id);
-    return id;
+    bank->accounts[size + 1] = NULL;
+    printf("New account with id: %s and initial balance: %f created!\n", id, init_balance);
+    return 1;
 }
 
-static int print_account_balance(struct Bank bank, int id) {
+static int print_account_balance(struct Bank *bank, char *id) {
     int account_index = account_exists(bank, id);
+
     if(account_index != -1) {
         float account_balance;
-        account_balance = bank.accounts[id]->balance;
-        printf("Account %d balance: %f\n", id, account_balance);
+        account_balance = bank->accounts[account_index]->balance;
+        printf("Account %s balance: %f\n", id, account_balance);
         return 1;
     } else {
-        printf("No such account created!");
+        printf("No such account created!\n");
         return 0;
     }
 }
 
-int process(char request[MAX_INPUT], struct Bank bank){
+int process(char *request, struct Bank *bank){
 
     char cmd[5];
     char arg[50];
@@ -66,11 +68,11 @@ int process(char request[MAX_INPUT], struct Bank bank){
     char ac2[1000];
     char sum[1000];
     printf("Server got request: %s\n", request);
-    sscanf(request, "%s %s", cmd, arg);
+    sscanf(request, "%s %[^\n]", cmd, arg);
     printf("Command part: %s, argument part: %s\n", cmd, arg);
     if(strcmp(cmd, "l")==0){
         sscanf(arg, "%s", ac1);
-        print_account_balance(bank, strtol(ac1, NULL, 10));
+        print_account_balance(bank, ac1);
     }
     if(strcmp(cmd, "t")==0){
 
@@ -84,8 +86,9 @@ int process(char request[MAX_INPUT], struct Bank bank){
     if(strcmp(cmd, "c")==0){
         sscanf(arg, "%s %s", ac1, sum);
         if(strcmp(sum, "\0")==0){
-
-            create_account(&bank, ac1, 0);
+            create_account(bank, ac1, 0);
+        } else{
+            create_account(bank, ac1, strtof(sum, NULL));
         }
     }
 

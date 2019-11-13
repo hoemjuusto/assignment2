@@ -9,7 +9,7 @@
 #include "server.h"
 #include "account.h"
 
-#define SERVERS 4  // my desktop has 4 cores and can handle 2 threads/core, so max would be 8 (6 servers + 1 master thread + 1 main)
+#define SERVERS 4
 
 // Getting the mutex
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -33,6 +33,8 @@ int main() {
     // initializing server threads and queues
     pthread_t *thread_group = malloc(sizeof(pthread_t) * SERVERS);
     server_queues = malloc(sizeof(struct Queue)*SERVERS);
+    bank.accounts = malloc(sizeof(NULL));
+    *(bank.accounts)= NULL;
 
     for(int i = 0; i < SERVERS; i++){
         int *id = malloc(sizeof(*id));
@@ -79,12 +81,11 @@ void *server_function(void *arg){
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
-            sleep(3);  // for demonstration purposes
             if(dequeue(&my_queue, request) != 1) {
                 fprintf(stderr, "Server %d having error handling request!\n", *(int *) arg);
             }
             // do processing
-            process(request, bank);
+            process(request, &bank);
         }
     }
     pthread_exit(0);
@@ -107,7 +108,7 @@ void *entry_function(void *arg){
 
         if(strcmp(input,"e") == 0)
         {
-            printf("Closing the bank!\n\n");
+            printf("\n\nExiting the bank!\n\n");
             keepRunning = 0;
         }else{
             int min_length; int min_index;

@@ -6,7 +6,7 @@
 #define ASSIGNMENT2_ACCOUNT_H
 #define MAX_ID 50
 struct Account {
-    int id;
+    char id[MAX_ID];
     float balance;
 };
 
