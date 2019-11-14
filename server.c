@@ -17,6 +17,7 @@
 
 static int account_exists(struct Bank *bank, char *id){
     for (int i = 0; bank->accounts[i] != NULL; i++) {
+        printf("iterate %d\n", i);
         if (strcmp(bank->accounts[i]->id, id) == 0) {
             return i;
         }
@@ -29,26 +30,26 @@ int create_account(struct Bank *bank, char *id, float init_balance){
         printf("Account with id %s already exists!\n", id);
         return -1;
     }
-    int size = 0;
-    for (int i = 0; bank->accounts[i] != NULL; i++){
-        size = i;
-    }
+    int i = 0;
+    for (i = 0; bank->accounts[i] != NULL; i++);
 
-    struct Account new_account = {*id, init_balance};
-    bank->accounts = realloc(bank->accounts, sizeof(struct Account *)*(size + 1));
+    struct Account new_account;
+    strcpy(new_account.id, id);
+    new_account.balance=init_balance;
+    bank->accounts = realloc(bank->accounts, sizeof(struct Account *)*(i + 1));
     if(bank->accounts == NULL){
         fprintf(stderr, "Failed to reallocate when creating new account!\n");
         return -1;
     }
-    bank->accounts[size] = &new_account;
-    bank->accounts[size + 1] = NULL;
-    printf("New account with id: %s and initial balance: %f created!\n", id, init_balance);
+    bank->accounts[i] = &new_account;
+    bank->accounts[i + 1] = NULL;
+    printf("New account with id: %s and initial balance: %.2f created!\n", bank->accounts[i]->id, init_balance);
     return 1;
 }
 
 static int print_account_balance(struct Bank *bank, char *id) {
     int account_index = account_exists(bank, id);
-
+    printf("Account index %d\n", account_index);
     if(account_index != -1) {
         float account_balance;
         account_balance = bank->accounts[account_index]->balance;

@@ -78,6 +78,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/juuso/CLionProjects/as2t/TCPserver.c">
+			<Option target="assignment2"/>
+		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/as2t/account.c">
 			<Option target="assignment2"/>
 		</Unit>
@@ -88,9 +91,6 @@
 			<Option target="assignment2"/>
 		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/as2t/bank.h">
-			<Option target="assignment2"/>
-		</Unit>
-		<Unit filename="/home/juuso/CLionProjects/as2t/main.c">
 			<Option target="assignment2"/>
 		</Unit>
 		<Unit filename="/home/juuso/CLionProjects/as2t/miscellanous.c">

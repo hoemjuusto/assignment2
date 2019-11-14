@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/92/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/92/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -57,22 +57,9 @@ include CMakeFiles/assignment2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/assignment2.dir/flags.make
 
-CMakeFiles/assignment2.dir/main.c.o: CMakeFiles/assignment2.dir/flags.make
-CMakeFiles/assignment2.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assignment2.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/main.c.o   -c /home/juuso/CLionProjects/as2t/main.c
-
-CMakeFiles/assignment2.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment2.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/as2t/main.c > CMakeFiles/assignment2.dir/main.c.i
-
-CMakeFiles/assignment2.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment2.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/as2t/main.c -o CMakeFiles/assignment2.dir/main.c.s
-
 CMakeFiles/assignment2.dir/queue.c.o: CMakeFiles/assignment2.dir/flags.make
 CMakeFiles/assignment2.dir/queue.c.o: ../queue.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/assignment2.dir/queue.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assignment2.dir/queue.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/queue.c.o   -c /home/juuso/CLionProjects/as2t/queue.c
 
 CMakeFiles/assignment2.dir/queue.c.i: cmake_force
@@ -85,7 +72,7 @@ CMakeFiles/assignment2.dir/queue.c.s: cmake_force
 
 CMakeFiles/assignment2.dir/miscellanous.c.o: CMakeFiles/assignment2.dir/flags.make
 CMakeFiles/assignment2.dir/miscellanous.c.o: ../miscellanous.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/assignment2.dir/miscellanous.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/assignment2.dir/miscellanous.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/miscellanous.c.o   -c /home/juuso/CLionProjects/as2t/miscellanous.c
 
 CMakeFiles/assignment2.dir/miscellanous.c.i: cmake_force
@@ -98,7 +85,7 @@ CMakeFiles/assignment2.dir/miscellanous.c.s: cmake_force
 
 CMakeFiles/assignment2.dir/account.c.o: CMakeFiles/assignment2.dir/flags.make
 CMakeFiles/assignment2.dir/account.c.o: ../account.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/assignment2.dir/account.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/assignment2.dir/account.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/account.c.o   -c /home/juuso/CLionProjects/as2t/account.c
 
 CMakeFiles/assignment2.dir/account.c.i: cmake_force
@@ -111,7 +98,7 @@ CMakeFiles/assignment2.dir/account.c.s: cmake_force
 
 CMakeFiles/assignment2.dir/server.c.o: CMakeFiles/assignment2.dir/flags.make
 CMakeFiles/assignment2.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/assignment2.dir/server.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/assignment2.dir/server.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/server.c.o   -c /home/juuso/CLionProjects/as2t/server.c
 
 CMakeFiles/assignment2.dir/server.c.i: cmake_force
@@ -124,7 +111,7 @@ CMakeFiles/assignment2.dir/server.c.s: cmake_force
 
 CMakeFiles/assignment2.dir/bank.c.o: CMakeFiles/assignment2.dir/flags.make
 CMakeFiles/assignment2.dir/bank.c.o: ../bank.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/assignment2.dir/bank.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/assignment2.dir/bank.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/bank.c.o   -c /home/juuso/CLionProjects/as2t/bank.c
 
 CMakeFiles/assignment2.dir/bank.c.i: cmake_force
@@ -135,24 +122,37 @@ CMakeFiles/assignment2.dir/bank.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment2.dir/bank.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/as2t/bank.c -o CMakeFiles/assignment2.dir/bank.c.s
 
+CMakeFiles/assignment2.dir/TCPserver.c.o: CMakeFiles/assignment2.dir/flags.make
+CMakeFiles/assignment2.dir/TCPserver.c.o: ../TCPserver.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/assignment2.dir/TCPserver.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment2.dir/TCPserver.c.o   -c /home/juuso/CLionProjects/as2t/TCPserver.c
+
+CMakeFiles/assignment2.dir/TCPserver.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment2.dir/TCPserver.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/as2t/TCPserver.c > CMakeFiles/assignment2.dir/TCPserver.c.i
+
+CMakeFiles/assignment2.dir/TCPserver.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment2.dir/TCPserver.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/as2t/TCPserver.c -o CMakeFiles/assignment2.dir/TCPserver.c.s
+
 # Object files for target assignment2
 assignment2_OBJECTS = \
-"CMakeFiles/assignment2.dir/main.c.o" \
 "CMakeFiles/assignment2.dir/queue.c.o" \
 "CMakeFiles/assignment2.dir/miscellanous.c.o" \
 "CMakeFiles/assignment2.dir/account.c.o" \
 "CMakeFiles/assignment2.dir/server.c.o" \
-"CMakeFiles/assignment2.dir/bank.c.o"
+"CMakeFiles/assignment2.dir/bank.c.o" \
+"CMakeFiles/assignment2.dir/TCPserver.c.o"
 
 # External object files for target assignment2
 assignment2_EXTERNAL_OBJECTS =
 
-assignment2: CMakeFiles/assignment2.dir/main.c.o
 assignment2: CMakeFiles/assignment2.dir/queue.c.o
 assignment2: CMakeFiles/assignment2.dir/miscellanous.c.o
 assignment2: CMakeFiles/assignment2.dir/account.c.o
 assignment2: CMakeFiles/assignment2.dir/server.c.o
 assignment2: CMakeFiles/assignment2.dir/bank.c.o
+assignment2: CMakeFiles/assignment2.dir/TCPserver.c.o
 assignment2: CMakeFiles/assignment2.dir/build.make
 assignment2: CMakeFiles/assignment2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/juuso/CLionProjects/as2t/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable assignment2"

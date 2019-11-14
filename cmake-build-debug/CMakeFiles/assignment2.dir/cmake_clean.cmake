@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/assignment2.dir/TCPserver.c.o"
   "CMakeFiles/assignment2.dir/account.c.o"
   "CMakeFiles/assignment2.dir/bank.c.o"
-  "CMakeFiles/assignment2.dir/main.c.o"
   "CMakeFiles/assignment2.dir/miscellanous.c.o"
   "CMakeFiles/assignment2.dir/queue.c.o"
   "CMakeFiles/assignment2.dir/server.c.o"

@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/92/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/92/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/juuso/CLionProjects/as2t/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/92/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/juuso/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/92/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,33 @@ assignment2: cmake_check_build_system
 assignment2/fast:
 	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/build
 .PHONY : assignment2/fast
+
+TCPserver.o: TCPserver.c.o
+
+.PHONY : TCPserver.o
+
+# target to build an object file
+TCPserver.c.o:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/TCPserver.c.o
+.PHONY : TCPserver.c.o
+
+TCPserver.i: TCPserver.c.i
+
+.PHONY : TCPserver.i
+
+# target to preprocess a source file
+TCPserver.c.i:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/TCPserver.c.i
+.PHONY : TCPserver.c.i
+
+TCPserver.s: TCPserver.c.s
+
+.PHONY : TCPserver.s
+
+# target to generate assembly for a file
+TCPserver.c.s:
+	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/TCPserver.c.s
+.PHONY : TCPserver.c.s
 
 account.o: account.c.o
 
@@ -176,33 +203,6 @@ bank.s: bank.c.s
 bank.c.s:
 	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/bank.c.s
 .PHONY : bank.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/assignment2.dir/build.make CMakeFiles/assignment2.dir/main.c.s
-.PHONY : main.c.s
 
 miscellanous.o: miscellanous.c.o
 
@@ -294,15 +294,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... assignment2"
 	@echo "... edit_cache"
+	@echo "... TCPserver.o"
+	@echo "... TCPserver.i"
+	@echo "... TCPserver.s"
 	@echo "... account.o"
 	@echo "... account.i"
 	@echo "... account.s"
 	@echo "... bank.o"
 	@echo "... bank.i"
 	@echo "... bank.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... miscellanous.o"
 	@echo "... miscellanous.i"
 	@echo "... miscellanous.s"
