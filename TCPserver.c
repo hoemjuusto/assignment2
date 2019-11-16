@@ -39,8 +39,6 @@ struct Bank bank = {.balance = 0, NULL};
 
 void *server_function(void *arg);  // prototype, implementation in the end
 
-
-
 int main(){
 
     // initializing server threads and queues
@@ -62,7 +60,7 @@ int main(){
 
     /*This takes care of the communication between the two programs, the server side program (this) and client program
     * Server side program is launched first*/
-    char server_message[256] = "You've reached the bank server!\nNow, give your request:\n";
+    char server_message[256] = "You've reached the bank server!\n\n";
     // create a server socket
     int server_socket;
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -97,9 +95,6 @@ int main(){
             if(enqueue(server_queues[min_index], input) == 0){
                 fprintf(stderr, "Error with directing the request %s to server!\n", input);
             }
-            for(int i=0; i<SERVERS; i++){
-                printf("Server %d queue length: %d\n", i, server_queues[i]->size);
-            }
             pthread_mutex_unlock(&mutex);
         }
 
@@ -130,11 +125,17 @@ void *server_function(void *arg){
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
+
+
             if(dequeue(&my_queue, request) != 1) {
                 fprintf(stderr, "Server %d having error handling request %s!\n", *(int *) arg, request);
             }
+
+
             // do processing
+
             process(request, &bank);
+
         }
     }
     pthread_exit(0);
