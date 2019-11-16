@@ -6,6 +6,38 @@
 
 #IncludeRegexTransform: 
 
+/home/juuso/CLionProjects/as2t/TCPserver.c
+stdio.h
+-
+stdlib.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+unistd.h
+-
+pthread.h
+-
+values.h
+-
+string.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+queue.h
+/home/juuso/CLionProjects/as2t/queue.h
+miscellanous.h
+/home/juuso/CLionProjects/as2t/miscellanous.h
+server.h
+/home/juuso/CLionProjects/as2t/server.h
+account.h
+/home/juuso/CLionProjects/as2t/account.h
+
 /home/juuso/CLionProjects/as2t/account.h
 
 /home/juuso/CLionProjects/as2t/bank.h

@@ -14,6 +14,8 @@
 #include <pthread.h>
 #include <values.h>
 #include <string.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "queue.h"
 #include "miscellanous.h"
@@ -24,6 +26,11 @@
 #define NUMOFCLIENTS 1
 
 #define SERVERS 4
+
+struct arg_struct {
+    int id;
+    int csock;
+};
 
 // Getting the mutex
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -47,15 +54,7 @@ int main(){
     bank.accounts = malloc(sizeof(NULL));
     *(bank.accounts)= NULL;
 
-    for(int i = 0; i < SERVERS; i++){
-        int *id = malloc(sizeof(*id));
-        if (id == NULL ) {
-            fprintf(stderr, "Couldn't allocate memory for thread arg.\n");
-            exit(EXIT_FAILURE);
-        }
-        *id = i;
-        pthread_create(&thread_group[i], NULL, server_function, id);
-    }
+
 
 
     /*This takes care of the communication between the two programs, the server side program (this) and client program
@@ -68,7 +67,14 @@ int main(){
     struct sockaddr_in server_address;
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(9002);  // same port as with client
-    server_address.sin_addr.s_addr = INADDR_ANY;
+
+    //in_addr struct has a single member s_addr
+    struct in_addr addr;
+
+    //Convert the IP dotted quad into struct in_addr
+    inet_aton("88.195.222.155", &(addr));
+
+    server_address.sin_addr.s_addr = addr.s_addr;
     // bind the socket to our specified IP and port
     bind(server_socket, (struct sockaddr*) &server_address, sizeof(server_address));
     // listen to the client
@@ -76,6 +82,13 @@ int main(){
     // to save the id of the client socket for future data sharing
     int client_socket;
     client_socket = accept(server_socket, NULL, NULL);
+    // creating threads
+    for(int i = 0; i < SERVERS; i++){
+        struct arg_struct args;
+        args.id = i;
+        args.csock = client_socket;
+        pthread_create(&thread_group[i], NULL, server_function, (void *)&args);
+    }
     // sending the server_message as a response to connection of client
     send(client_socket, server_message, sizeof(server_message), 0);
     // communication between client and the server
@@ -112,7 +125,12 @@ int main(){
 
 void *server_function(void *arg){
 
-    int my_id = *(int*) arg;
+    struct arg_struct *args = arg;
+    int my_id = args->id;
+    int client_socket = args->csock;
+    pthread_mutex_unlock(&mutex);
+    printf("My id: %d, client sock: %d\n", my_id, client_socket);
+
     static char empty[1] = "\0";
     struct Queue my_queue = {empty, NULL, 0};  // in my queue implementation first member is empty
 
@@ -133,8 +151,9 @@ void *server_function(void *arg){
 
 
             // do processing
-
-            process(request, &bank);
+            char response[100];
+            process(request, &bank, response);
+            send(client_socket, response, sizeof(response), 0);
 
         }
     }

@@ -57,24 +57,26 @@ int create_account(struct Bank *bank, char *id, float init_balance){
     return 1;
 }
 
-static int print_account_balance(struct Bank *bank, char *id) {
+static int print_account_balance(struct Bank *bank, char *id, char *response_buffer) {
 
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock(&mutex);
     int account_index = account_exists(bank, id);
     if(account_index == -1) {
         printf("No such account created!\n");
+        snprintf(response_buffer, 100, "No account with id %s created!\n", id);
         pthread_mutex_unlock(&mutex);
         return 0;
     }
     printf("Account id: %s, balance: %f\n", bank->accounts[account_index]->id, bank->accounts[account_index]->balance);
+    snprintf(response_buffer, 100, "Account id: %s, balance: %f\n", bank->accounts[account_index]->id, bank->accounts[account_index]->balance);
     pthread_mutex_unlock(&mutex);
     return 1;
 
 
 }
 
-int process(char *request, struct Bank *bank){
+int process(char *request, struct Bank *bank, char *response){
 
     char cmd[5];
     char arg[50];
@@ -86,7 +88,7 @@ int process(char *request, struct Bank *bank){
     printf("Command part: %s, argument part: %s\n", cmd, arg);
     if(strcmp(cmd, "l")==0){
         sscanf(arg, "%s", ac1);
-        print_account_balance(bank, ac1);
+        print_account_balance(bank, ac1, response);
     }
     if(strcmp(cmd, "t")==0){
 
