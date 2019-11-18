@@ -21,6 +21,19 @@ int isEmpty(struct Queue *q){
         return 0;
     }
 }
+int overtake(struct Queue *oq, const char *request){
+    if(!isEmpty(oq)) {
+        struct Queue *new = malloc(sizeof(struct Queue));
+        new->request = malloc(strlen(request) + 1);
+        strcpy(new->request, request);
+        new->next = oq->next;
+        oq->next = new;
+    }else{
+        enqueue(oq, request);
+    }
+    return 1;
+}
+
 
 int enqueue(struct Queue *oq, const char *request){
     struct Queue *q = oq;

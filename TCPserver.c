@@ -40,6 +40,10 @@ pthread_cond_t dataNotProduced =
         PTHREAD_COND_INITIALIZER;
 pthread_cond_t dataNotConsumed =
         PTHREAD_COND_INITIALIZER;
+pthread_barrier_t our_barrier;
+
+
+
 // Global variables
 int keepRunning = 1;
 struct Queue **server_queues;  // array of server queues
@@ -54,6 +58,9 @@ int main(){
     server_queues = malloc(sizeof(struct Queue)*SERVERS);
     bank.accounts = malloc(sizeof(NULL));
     *(bank.accounts)= NULL;
+
+
+    pthread_barrier_init(&our_barrier,NULL,4);
     // Following is socket programming
     char server_message[256] = "You've reached the bank server!\n\n";
     // create a server socket
@@ -96,10 +103,14 @@ int main(){
         char input[256];
         recv(client_socket, &input, sizeof(input), 0);
 
-        if(strcmp(input,"e") == 0)
-        {
+        if(strcmp(input,"e") == 0) {
             printf("\n\nClient exited the bank!\n\n");
             keepRunning = 0;
+
+        }else if(strcmp(input,"b") == 0){
+            for (int i = 0; i < SERVERS; i++){
+                overtake(server_queues[i], input);
+            }
         }else{
             int min_length; int min_index;
             min(server_queues, &min_length, &min_index);
@@ -153,18 +164,13 @@ void *server_function(void *arg){
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
-
-
             if(dequeue(&my_queue, request) != 1) {
                 fprintf(stderr, "Server %d having error handling request %s!\n", *(int *) arg, request);
             }
-
-
             // do processing
             char response[100];
-            process(request, &bank, response);
+            process(request, &bank, response, );
             send(client_socket, response, sizeof(response), 0);
-
         }
     }
     free(args);

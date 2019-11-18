@@ -76,7 +76,9 @@ static int print_account_balance(struct Bank *bank, char *id, char *response_buf
 
 }
 
-int process(char *request, struct Bank *bank, char *response){
+int process(char *request, struct Bank *bank, char *response, pthread_barrier_t *our_barrier){
+
+
 
     // initializing everything as empty
     char cmd[5] = "\0";
@@ -107,11 +109,20 @@ int process(char *request, struct Bank *bank, char *response){
     if(strcmp(cmd, "w")==0){
         if(sscanf(arg, "%s %s", ac1, sum) == 2) {
             int ac1_index = account_exists(bank, ac1);
-            if(ac1_index == -1) {snprintf(response, 100, "Account id's are incorrect or don't exist.\n");}
+            if(ac1_index == -1) {snprintf(response, 100, "Account id is incorrect or doesn't exist.\n"); return 0;}
+            snprintf(response, 100, "Managed to withdraw %f from account %s", withdraw(bank->accounts[ac1_index], strtof(sum, NULL)), ac1);
+        } else{
+            snprintf(response, 100, "Wrong number of arguments\n");
         }
     }
     if(strcmp(cmd, "d")==0){
-
+        if(sscanf(arg, "%s %s", ac1, sum) == 2) {
+            int ac1_index = account_exists(bank, ac1);
+            if(ac1_index == -1) {snprintf(response, 100, "Account id is incorrect or doesn't exist.\n"); return 0;}
+            deposit(bank->accounts[ac1_index], strtof(sum, NULL));
+        } else{
+            snprintf(response, 100, "Wrong number of arguments\n");
+        }
     }
     if(strcmp(cmd, "c")==0){
         if(sscanf(arg, "%s %s", ac1, sum)==2){
@@ -119,6 +130,10 @@ int process(char *request, struct Bank *bank, char *response){
         } else{
             create_account(bank, ac1, 0);
         }
+    }
+    if(strcmp(cmd, "b")==0){
+        pthread_barrier_wait(&our_barrier);
+        snprintf(response, 100, "Bank balance: %f", bank->balance);
     }
     char buffer[] = "\nRequest was successful\n";
     strcat(response, buffer);

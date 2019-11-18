@@ -13,6 +13,8 @@ struct Queue {
 
 void list_requests(struct Queue *q);
 
+int overtake(struct Queue *q, const char *request);
+
 int isEmpty(struct Queue *q);
 
 int enqueue(struct Queue *q, const char *request);
