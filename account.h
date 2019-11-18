@@ -12,6 +12,6 @@ struct Account {
 
 int deposit(struct Account *a, float amount);  // returns 1 for success, 0 for failure
 
-double withdraw(struct Account *a, float amount);  // returns the amount successfully withdrawn
+float withdraw(struct Account *a, float amount);  // returns the amount successfully withdrawn
 
 #endif //ASSIGNMENT2_ACCOUNT_H

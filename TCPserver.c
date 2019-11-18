@@ -16,6 +16,7 @@
 #include <string.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <errno.h>
 
 #include "queue.h"
 #include "miscellanous.h"
@@ -53,12 +54,7 @@ int main(){
     server_queues = malloc(sizeof(struct Queue)*SERVERS);
     bank.accounts = malloc(sizeof(NULL));
     *(bank.accounts)= NULL;
-
-
-
-
-    /*This takes care of the communication between the two programs, the server side program (this) and client program
-    * Server side program is launched first*/
+    // Following is socket programming
     char server_message[256] = "You've reached the bank server!\n\n";
     // create a server socket
     int server_socket;
@@ -67,29 +63,32 @@ int main(){
     struct sockaddr_in server_address;
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(9002);  // same port as with client
-
+    server_address.sin_addr.s_addr = INADDR_ANY;
+    /*
     //in_addr struct has a single member s_addr
     struct in_addr addr;
-
     //Convert the IP dotted quad into struct in_addr
     inet_aton("88.195.222.155", &(addr));
-
     server_address.sin_addr.s_addr = addr.s_addr;
+    */
     // bind the socket to our specified IP and port
     bind(server_socket, (struct sockaddr*) &server_address, sizeof(server_address));
     // listen to the client
     listen(server_socket, NUMOFCLIENTS);
     // to save the id of the client socket for future data sharing
     int client_socket;
-    client_socket = accept(server_socket, NULL, NULL);
+    client_socket = accept(server_socket, NULL, NULL);  // waits for connection of client
+    if(client_socket == -1){
+        exit(errno);
+    }
     // creating threads
     for(int i = 0; i < SERVERS; i++){
-        struct arg_struct args;
-        args.id = i;
-        args.csock = client_socket;
-        pthread_create(&thread_group[i], NULL, server_function, (void *)&args);
+        struct arg_struct *args = malloc(sizeof(struct arg_struct));  // thread arguments
+        args->id = i;
+        args->csock = client_socket;
+        pthread_create(&thread_group[i], NULL, server_function, (void *)args);
     }
-    // sending the server_message as a response to connection of client
+    // sending the server_message as a response to successful connection of client
     send(client_socket, server_message, sizeof(server_message), 0);
     // communication between client and the server
     while(keepRunning) {
@@ -115,10 +114,22 @@ int main(){
     //closing the socket
     close(server_socket);
 
+    // free's
     // wait for all threads to finish
     for(int i = 0; i < SERVERS; i++) {
         pthread_join(thread_group[i], NULL);
     }
+    free(thread_group);
+    for (int ind = 0; bank.accounts[ind] != NULL; ind++){
+        free(bank.accounts[ind]);
+    }
+    free(bank.accounts);
+    for (int ind = 0; ind > SERVERS; ind++){
+        char holder_buffer[100];
+        while(dequeue(server_queues[ind], holder_buffer));
+        free(server_queues[ind]);
+    }
+    free(server_queues);
 
     return 0;
 }
@@ -128,7 +139,6 @@ void *server_function(void *arg){
     struct arg_struct *args = arg;
     int my_id = args->id;
     int client_socket = args->csock;
-    pthread_mutex_unlock(&mutex);
     printf("My id: %d, client sock: %d\n", my_id, client_socket);
 
     static char empty[1] = "\0";
@@ -157,5 +167,6 @@ void *server_function(void *arg){
 
         }
     }
+    free(args);
     pthread_exit(0);
 }

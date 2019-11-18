@@ -48,6 +48,7 @@ int dequeue(struct Queue *q, char *buffer){
         strcpy(buffer, q->next->request);
         struct Queue *temp = q->next;
         q->next=q->next->next;
+        free(temp->request);
         free(temp);
         q->size -=1;
         return 1;

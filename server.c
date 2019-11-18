@@ -78,11 +78,14 @@ static int print_account_balance(struct Bank *bank, char *id, char *response_buf
 
 int process(char *request, struct Bank *bank, char *response){
 
-    char cmd[5];
-    char arg[50];
-    char ac1[1000];
-    char ac2[1000];
-    char sum[1000];
+    // initializing everything as empty
+    char cmd[5] = "\0";
+    char arg[50] = "\0";
+    char ac1[1000] = "\0";
+    char ac2[1000] = "\0";
+    char sum[1000] = "\0";
+    strcpy(response, "\0");
+
     printf("Server got request: %s\n", request);
     sscanf(request, "%s %[^\n]", cmd, arg);
     printf("Command part: %s, argument part: %s\n", cmd, arg);
@@ -91,24 +94,34 @@ int process(char *request, struct Bank *bank, char *response){
         print_account_balance(bank, ac1, response);
     }
     if(strcmp(cmd, "t")==0){
-
+        if(sscanf(arg, "%s %s %s", ac1, ac2, sum) == 3){
+            int ac1_index = account_exists(bank, ac1);
+            int ac2_index = account_exists(bank, ac2);
+            if(ac1_index == -1 || ac2_index == -1){
+                snprintf(response, 100, "Account id's are incorrect or don't exist.\n");
+                return 0;
+            }
+            deposit(bank->accounts[ac2_index], withdraw(bank->accounts[ac1_index], strtof(sum, NULL)));
+        }
     }
     if(strcmp(cmd, "w")==0){
-
+        if(sscanf(arg, "%s %s", ac1, sum) == 2) {
+            int ac1_index = account_exists(bank, ac1);
+            if(ac1_index == -1) {snprintf(response, 100, "Account id's are incorrect or don't exist.\n");}
+        }
     }
     if(strcmp(cmd, "d")==0){
 
     }
     if(strcmp(cmd, "c")==0){
-        sscanf(arg, "%s %s", ac1, sum);
-        if(strcmp(sum, "\0")==0){
-            create_account(bank, ac1, 0);
-        } else{
+        if(sscanf(arg, "%s %s", ac1, sum)==2){
             create_account(bank, ac1, strtof(sum, NULL));
-
+        } else{
+            create_account(bank, ac1, 0);
         }
     }
-
+    char buffer[] = "\nRequest was successful\n";
+    strcat(response, buffer);
 
     return 1;
 }
