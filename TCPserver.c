@@ -36,11 +36,7 @@ struct arg_struct {
 // Getting the mutex
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-pthread_cond_t dataNotProduced =
-        PTHREAD_COND_INITIALIZER;
-pthread_cond_t dataNotConsumed =
-        PTHREAD_COND_INITIALIZER;
-pthread_barrier_t our_barrier;
+pthread_barrier_t barrier;
 
 
 
@@ -56,11 +52,12 @@ int main(){
     // initializing server threads and queues
     pthread_t *thread_group = malloc(sizeof(pthread_t) * SERVERS);
     server_queues = malloc(sizeof(struct Queue)*SERVERS);
+    // last member of the banks account pointer array is NULL pointer
     bank.accounts = malloc(sizeof(NULL));
     *(bank.accounts)= NULL;
 
 
-    pthread_barrier_init(&our_barrier,NULL,4);
+    pthread_barrier_init(&barrier,NULL,5);
     // Following is socket programming
     char server_message[256] = "You've reached the bank server!\n\n";
     // create a server socket
@@ -111,12 +108,15 @@ int main(){
             for (int i = 0; i < SERVERS; i++){
                 overtake(server_queues[i], input);
             }
+            pthread_barrier_wait(&barrier);
+            snprintf(server_message, sizeof(server_message), "Bank balance: %f\n", bank.balance);
         }else{
             int min_length; int min_index;
             min(server_queues, &min_length, &min_index);
             pthread_mutex_lock(&mutex);
             if(enqueue(server_queues[min_index], input) == 0){
                 fprintf(stderr, "Error with directing the request %s to server!\n", input);
+                send(client_socket, server_message, sizeof(server_message), 0);
             }
             pthread_mutex_unlock(&mutex);
         }
@@ -169,7 +169,7 @@ void *server_function(void *arg){
             }
             // do processing
             char response[100];
-            process(request, &bank, response, );
+            process(request, &bank, response, &barrier);
             send(client_socket, response, sizeof(response), 0);
         }
     }

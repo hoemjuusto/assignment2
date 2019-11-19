@@ -76,7 +76,7 @@ static int print_account_balance(struct Bank *bank, char *id, char *response_buf
 
 }
 
-int process(char *request, struct Bank *bank, char *response, pthread_barrier_t *our_barrier){
+int process(char *request, struct Bank *bank, char *response, pthread_barrier_t *barrier){
 
 
 
@@ -132,8 +132,7 @@ int process(char *request, struct Bank *bank, char *response, pthread_barrier_t 
         }
     }
     if(strcmp(cmd, "b")==0){
-        pthread_barrier_wait(&our_barrier);
-        snprintf(response, 100, "Bank balance: %f", bank->balance);
+        pthread_barrier_wait(barrier);
     }
     char buffer[] = "\nRequest was successful\n";
     strcat(response, buffer);
