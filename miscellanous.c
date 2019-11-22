@@ -3,6 +3,8 @@
 //
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 #include "miscellanous.h"
 #include "queue.h"
 #include "stdio.h"
@@ -14,9 +16,7 @@ void min(struct Queue **sqs, int *min_value, int *min_index){
     int index;
     minimum = sqs[0]->size;
     index = 0;
-    /*size_t size = sizeof(sqs)/sizeof(*sqs);  //todo: get this to work
-    printf("%zu", size);*/
-    for (int c = 1; c < SERVERS; c++)
+    for (int c = 1; sqs[c] != NULL; c++)
     {
         if (sqs[c]->size < minimum)
         {
@@ -26,5 +26,24 @@ void min(struct Queue **sqs, int *min_value, int *min_index){
     }
     *min_value = minimum;
     *min_index = index;
+}
+
+void wlog(const char *logtext){
+
+    char filepath[] = "logfile.log";
+    FILE *f = fopen(filepath, "a");
+
+    if (-1 == dup2(fileno(f), fileno(stderr))) { perror("cannot redirect stderr");}
+
+    char buff[20];
+    struct tm *sTm;
+
+    time_t now = time (0);
+    sTm = gmtime (&now);
+
+    strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
+    fprintf(f, "%s %s\n", buff, logtext);
+    fflush(f);
+    fclose(f);
 }
 

@@ -8,4 +8,5 @@
 #include <stddef.h>
 #include "queue.h"
 void min(struct Queue **sqs, int *min_value, int *min_index);
+void wlog(const char *logtext);
 #endif //ASSIGNMENT2_MISCELLANOUS_H

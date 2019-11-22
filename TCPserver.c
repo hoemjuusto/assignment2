@@ -49,9 +49,14 @@ void *server_function(void *arg);  // prototype, implementation in the end
 
 int main(){
 
+    char logtext[100];  // for parsed log messages
+    wlog("Starting the program.");
+    FILE *f = fopen("logfile.log", "w"); // cleans log
+    fclose(f);
     // initializing server threads and queues
     pthread_t *thread_group = malloc(sizeof(pthread_t) * SERVERS);
-    server_queues = malloc(sizeof(struct Queue)*SERVERS);
+    server_queues = malloc(sizeof(struct Queue*)*SERVERS + sizeof(NULL));
+    server_queues[SERVERS] = NULL;
     // last member of the banks account pointer array is NULL pointer
     bank.accounts = malloc(sizeof(NULL));
     *(bank.accounts)= NULL;
@@ -61,6 +66,7 @@ int main(){
     // Following is socket programming
     char server_message[256] = "You've reached the bank server!\n\n";
     // create a server socket
+    wlog("Creating TCP/IP-socket.");
     int server_socket;
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     //define server address
@@ -72,7 +78,7 @@ int main(){
     //in_addr struct has a single member s_addr
     struct in_addr addr;
     //Convert the IP dotted quad into struct in_addr
-    inet_aton("88.195.222.155", &(addr));
+    inet_aton("10.100.29.252", &(addr));
     server_address.sin_addr.s_addr = addr.s_addr;
     */
     // bind the socket to our specified IP and port
@@ -81,10 +87,12 @@ int main(){
     listen(server_socket, NUMOFCLIENTS);
     // to save the id of the client socket for future data sharing
     int client_socket;
+    wlog("Waiting for client to join.");
     client_socket = accept(server_socket, NULL, NULL);  // waits for connection of client
     if(client_socket == -1){
         exit(errno);
     }
+    wlog("Client connecting...");
     // creating threads
     for(int i = 0; i < SERVERS; i++){
         struct arg_struct *args = malloc(sizeof(struct arg_struct));  // thread arguments
@@ -92,37 +100,53 @@ int main(){
         args->csock = client_socket;
         pthread_create(&thread_group[i], NULL, server_function, (void *)args);
     }
+    snprintf(logtext, sizeof(logtext), "Created %d server threads.", SERVERS);
+    wlog(logtext);
     // sending the server_message as a response to successful connection of client
     send(client_socket, server_message, sizeof(server_message), 0);
+    wlog("Client joined! Now waiting for requests from client.");
     // communication between client and the server
     while(keepRunning) {
         // receive requests from the client as input
         char input[256];
         recv(client_socket, &input, sizeof(input), 0);
-
+        snprintf(logtext, sizeof(logtext), "Received request %s from client.", input);
+        wlog(logtext);
         if(strcmp(input,"e") == 0) {
             printf("\n\nClient exited the bank!\n\n");
-            keepRunning = 0;
+            wlog("Client exited the bank!");
+            keepRunning = 0;  //this also ends threads
 
         }else if(strcmp(input,"b") == 0){
+            wlog("Client initiated query for bank balance.");
             for (int i = 0; i < SERVERS; i++){
                 overtake(server_queues[i], input);
             }
+            wlog("Waiting for servers to reply to master query!\n");
             pthread_barrier_wait(&barrier);
-            snprintf(server_message, sizeof(server_message), "Bank balance: %f\n", bank.balance);
+            wlog("All threads answered to master query!\n");
+            float bank_balance = 0;
+            for (int i = 0; bank.accounts[i] != NULL; i++) {
+                bank_balance += bank.accounts[i]->balance;
+            }
+            snprintf(server_message, sizeof(server_message), "Bank balance: %f\n", bank_balance);
+            printf("Bank balance: %f\n", bank_balance);
+            send(client_socket, server_message, sizeof(server_message), 0);
         }else{
             int min_length; int min_index;
             min(server_queues, &min_length, &min_index);
             pthread_mutex_lock(&mutex);
+            snprintf(logtext, sizeof(logtext), "Directing request to server %d.", min_index);
+            wlog(logtext);
             if(enqueue(server_queues[min_index], input) == 0){
                 fprintf(stderr, "Error with directing the request %s to server!\n", input);
                 send(client_socket, server_message, sizeof(server_message), 0);
             }
             pthread_mutex_unlock(&mutex);
         }
-
     }
     //closing the socket
+    wlog("Closing the TCP/IP-socket.");
     close(server_socket);
 
     // free's
@@ -160,17 +184,23 @@ void *server_function(void *arg){
     pthread_mutex_unlock(&mutex);
 
     char request[256];
+    char logtext[100];
 
     while(keepRunning){
 
         if(!isEmpty(&my_queue)){
+            sleep(10);
             if(dequeue(&my_queue, request) != 1) {
-                fprintf(stderr, "Server %d having error handling request %s!\n", *(int *) arg, request);
+                fprintf(stderr, "Server %d having error handling request %s!\n", my_id, request);
+            } else {
+                // do processing
+                snprintf(logtext, sizeof(logtext), "Server %d starting to process request %s.", my_id, request);
+                wlog(logtext);
+                char response[100];
+                process(request, &bank, response, &barrier);
+                wlog(response);
+                send(client_socket, response, sizeof(response), 0);
             }
-            // do processing
-            char response[100];
-            process(request, &bank, response, &barrier);
-            send(client_socket, response, sizeof(response), 0);
         }
     }
     free(args);

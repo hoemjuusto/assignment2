@@ -50,9 +50,6 @@ int create_account(struct Bank *bank, char *id, float init_balance){
     bank->accounts[i] = new_account;
     bank->accounts[i + 1] = NULL;
     printf("New account with id: %s and initial balance: %.2f created!\n", bank->accounts[i]->id, init_balance);
-    for (int ind = 0; bank->accounts[ind] != NULL; ind++){
-        printf("Account id %s, balance %f\n", bank->accounts[ind]->id, bank->accounts[ind]->balance);
-    }
     pthread_mutex_unlock(&mutex);
     return 1;
 }
@@ -77,9 +74,6 @@ static int print_account_balance(struct Bank *bank, char *id, char *response_buf
 }
 
 int process(char *request, struct Bank *bank, char *response, pthread_barrier_t *barrier){
-
-
-
     // initializing everything as empty
     char cmd[5] = "\0";
     char arg[50] = "\0";
@@ -87,15 +81,16 @@ int process(char *request, struct Bank *bank, char *response, pthread_barrier_t 
     char ac2[1000] = "\0";
     char sum[1000] = "\0";
     strcpy(response, "\0");
-
-    printf("Server got request: %s\n", request);
     sscanf(request, "%s %[^\n]", cmd, arg);
     printf("Command part: %s, argument part: %s\n", cmd, arg);
     if(strcmp(cmd, "l")==0){
-        sscanf(arg, "%s", ac1);
-        print_account_balance(bank, ac1, response);
-    }
-    if(strcmp(cmd, "t")==0){
+        if(sscanf(arg, "%s", ac1) == 1){
+            print_account_balance(bank, ac1, response);
+        }else{
+            printf("Wrong number of arguments!\n");
+            return 0;
+        }
+    } else if(strcmp(cmd, "t")==0){
         if(sscanf(arg, "%s %s %s", ac1, ac2, sum) == 3){
             int ac1_index = account_exists(bank, ac1);
             int ac2_index = account_exists(bank, ac2);
@@ -105,36 +100,44 @@ int process(char *request, struct Bank *bank, char *response, pthread_barrier_t 
             }
             deposit(bank->accounts[ac2_index], withdraw(bank->accounts[ac1_index], strtof(sum, NULL)));
         }
-    }
-    if(strcmp(cmd, "w")==0){
+    } else if(strcmp(cmd, "w")==0){
         if(sscanf(arg, "%s %s", ac1, sum) == 2) {
             int ac1_index = account_exists(bank, ac1);
             if(ac1_index == -1) {snprintf(response, 100, "Account id is incorrect or doesn't exist.\n"); return 0;}
             snprintf(response, 100, "Managed to withdraw %f from account %s", withdraw(bank->accounts[ac1_index], strtof(sum, NULL)), ac1);
         } else{
+            printf("Wrong number of arguments!\n");
             snprintf(response, 100, "Wrong number of arguments\n");
+            return 0;
         }
-    }
-    if(strcmp(cmd, "d")==0){
+    } else if(strcmp(cmd, "d")==0){
         if(sscanf(arg, "%s %s", ac1, sum) == 2) {
             int ac1_index = account_exists(bank, ac1);
             if(ac1_index == -1) {snprintf(response, 100, "Account id is incorrect or doesn't exist.\n"); return 0;}
             deposit(bank->accounts[ac1_index], strtof(sum, NULL));
         } else{
-            snprintf(response, 100, "Wrong number of arguments\n");
+            printf("Wrong number of arguments!\n");
+            snprintf(response, 100, "Wrong number of arguments!\n");
+             return 0;
         }
-    }
-    if(strcmp(cmd, "c")==0){
-        if(sscanf(arg, "%s %s", ac1, sum)==2){
+    } else if(strcmp(cmd, "c")==0){
+        int arg_num = sscanf(arg, "%s %s", ac1, sum);
+        if(arg_num==2){
             create_account(bank, ac1, strtof(sum, NULL));
-        } else{
+        } else if (arg_num == 1){
             create_account(bank, ac1, 0);
+        } else{
+            printf("Wrong number of arguments!\n");
+            return 0;
         }
-    }
-    if(strcmp(cmd, "b")==0){
+    } else if(strcmp(cmd, "b")==0){
         pthread_barrier_wait(barrier);
+        return 1;
+    } else{
+        printf("Unknown command %s encountered\n", request);
     }
-    char buffer[] = "\nRequest was successful\n";
+    char buffer[50];
+    snprintf(buffer, sizeof(buffer), "\nRequest %s was successful!\n", request);
     strcat(response, buffer);
 
     return 1;
