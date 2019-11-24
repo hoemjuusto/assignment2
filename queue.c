@@ -28,6 +28,7 @@ int overtake(struct Queue *oq, const char *request){
         strcpy(new->request, request);
         new->next = oq->next;
         oq->next = new;
+        oq->size +=1;
     }else{
         enqueue(oq, request);
     }

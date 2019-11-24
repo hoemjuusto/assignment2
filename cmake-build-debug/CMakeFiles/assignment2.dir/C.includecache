@@ -6,37 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/juuso/CLionProjects/assignment2/TCPserver.c
-stdio.h
--
-stdlib.h
--
-sys/types.h
--
-sys/socket.h
--
-netinet/in.h
--
-unistd.h
--
-pthread.h
--
-values.h
--
-string.h
--
-netinet/in.h
--
-arpa/inet.h
--
-errno.h
--
-queue.h
-/home/juuso/CLionProjects/assignment2/queue.h
-miscellanous.h
-/home/juuso/CLionProjects/assignment2/miscellanous.h
-server.h
-/home/juuso/CLionProjects/assignment2/server.h
+/home/juuso/CLionProjects/assignment2/account.c
 account.h
 /home/juuso/CLionProjects/assignment2/account.h
 

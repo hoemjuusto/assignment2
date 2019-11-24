@@ -49,7 +49,8 @@ void *server_function(void *arg);  // prototype, implementation in the end
 
 
 int main(){
-
+    printf("\n\nThis terminal is for server side outputs. (Most likely in real life this wouldn't show to client)\n\n");
+    fflush(stdout);
     char logtext[100];  // for parsed log messages
     wlog("Starting the program.");
     FILE *f = fopen("logfile.log", "w"); // cleans log
@@ -108,20 +109,20 @@ int main(){
     send(client_socket, server_message, sizeof(server_message), 0);
     wlog("Client joined! Now waiting for requests from client.");
     // communication between client and the server
+    char input[500];
     while(keepRunning) {
         // receive requests from the client as input
-        char input[256];
-
-        int connection_status = 1;  // for the case that client exits by ctrl + c
-        connection_status = recv(client_socket, &input, sizeof(input), 0);
-
-        if(connection_status == 0){
+        strcpy(input, "\0");
+        int n = 1;  // for the case that client exits by ctrl + c
+        n = recv(client_socket, input, sizeof(input) - 1, 0);
+        if(n == 0){
             printf("Client exited with ctrl + c command!\n");
             break;
-        } else if(connection_status < 0){
+        } else if(n < 0){
             fprintf(stderr, "Client exited with error number: %d\n", errno);
         }
-
+        input[n] = '\0';
+        printf("Received request %s from client.\n", input);
         snprintf(logtext, sizeof(logtext), "Received request %s from client.", input);
         wlog(logtext);
         if(strcmp(input,"e") == 0) {
