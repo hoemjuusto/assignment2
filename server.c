@@ -76,11 +76,12 @@ static int print_account_balance(struct Bank *bank, char *id, char *response_buf
 int process(char *request, struct Bank *bank, char *response, pthread_barrier_t *barrier){
     // initializing everything as empty
     char cmd[5] = "\0";
-    char arg[50] = "\0";
+    char arg[100] = "\0";
     char ac1[1000] = "\0";
     char ac2[1000] = "\0";
     char sum[1000] = "\0";
     strcpy(response, "\0");
+    strcat(request, "\n");  // for next line to work
     sscanf(request, "%s %[^\n]", cmd, arg);
     printf("Command part: %s, argument part: %s\n", cmd, arg);
     if(strcmp(cmd, "l")==0){

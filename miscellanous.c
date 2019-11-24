@@ -42,7 +42,9 @@ void wlog(const char *logtext){
     sTm = gmtime (&now);
 
     strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
-    fprintf(f, "%s %s\n", buff, logtext);
+
+    char id[] = "<server>";
+    fprintf(f, "%s %s %s\n", buff, id, logtext);
     fflush(f);
     fclose(f);
 }

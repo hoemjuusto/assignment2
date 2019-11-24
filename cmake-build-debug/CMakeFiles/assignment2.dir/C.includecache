@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/juuso/CLionProjects/as2v2/TCPserver.c
+/home/juuso/CLionProjects/assignment2/TCPserver.c
 stdio.h
 -
 stdlib.h
@@ -32,27 +32,27 @@ arpa/inet.h
 errno.h
 -
 queue.h
-/home/juuso/CLionProjects/as2v2/queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 miscellanous.h
-/home/juuso/CLionProjects/as2v2/miscellanous.h
+/home/juuso/CLionProjects/assignment2/miscellanous.h
 server.h
-/home/juuso/CLionProjects/as2v2/server.h
+/home/juuso/CLionProjects/assignment2/server.h
 account.h
-/home/juuso/CLionProjects/as2v2/account.h
+/home/juuso/CLionProjects/assignment2/account.h
 
-/home/juuso/CLionProjects/as2v2/account.h
+/home/juuso/CLionProjects/assignment2/account.h
 
-/home/juuso/CLionProjects/as2v2/bank.h
+/home/juuso/CLionProjects/assignment2/bank.h
 
-/home/juuso/CLionProjects/as2v2/miscellanous.h
+/home/juuso/CLionProjects/assignment2/miscellanous.h
 stddef.h
 -
 queue.h
-/home/juuso/CLionProjects/as2v2/queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 
-/home/juuso/CLionProjects/as2v2/queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 
-/home/juuso/CLionProjects/as2v2/server.c
+/home/juuso/CLionProjects/assignment2/server.c
 stdio.h
 -
 stdlib.h
@@ -66,19 +66,19 @@ string.h
 unistd.h
 -
 queue.h
-/home/juuso/CLionProjects/as2v2/queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 miscellanous.h
-/home/juuso/CLionProjects/as2v2/miscellanous.h
+/home/juuso/CLionProjects/assignment2/miscellanous.h
 stddef.h
 -
 server.h
-/home/juuso/CLionProjects/as2v2/server.h
+/home/juuso/CLionProjects/assignment2/server.h
 account.h
-/home/juuso/CLionProjects/as2v2/account.h
+/home/juuso/CLionProjects/assignment2/account.h
 
-/home/juuso/CLionProjects/as2v2/server.h
+/home/juuso/CLionProjects/assignment2/server.h
 queue.h
-/home/juuso/CLionProjects/as2v2/queue.h
+/home/juuso/CLionProjects/assignment2/queue.h
 bank.h
-/home/juuso/CLionProjects/as2v2/bank.h
+/home/juuso/CLionProjects/assignment2/bank.h
 
