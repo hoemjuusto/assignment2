@@ -26,7 +26,7 @@
 
 #define NUM_OF_CLIENTS 1
 #define PORT_NUM 9005
-#define SERVERS 4
+#define SERVERS 7
 
 struct arg_struct {
     int id;
@@ -49,7 +49,7 @@ void *server_function(void *arg);  // prototype, implementation in the end
 
 
 int main(){
-    printf("\n\nThis terminal is for server side outputs. (Most likely in real life this wouldn't show to client)\n\n");
+    printf("\n\nThis terminal is for server side outputs.\n\n");
     fflush(stdout);
     char logtext[100];  // for parsed log messages
     wlog("Starting the program.");
@@ -97,7 +97,7 @@ int main(){
     wlog("Client connecting...");
     // creating threads
     for(int i = 0; i < SERVERS; i++){
-        struct arg_struct *args = malloc(sizeof(struct arg_struct));  // thread arguments
+        struct arg_struct *args = calloc(1, sizeof(struct arg_struct));  // thread arguments
         args->id = i;
         args->csock = client_socket;
         pthread_create(&thread_group[i], NULL, server_function, (void *)args);
@@ -188,7 +188,7 @@ void *server_function(void *arg){
     int client_socket = args->csock;
     printf("Server with id: %d, and client sock: %d started\n", my_id, client_socket);
 
-    static char empty[1] = "\0";
+    static char empty[] = "\0";
     struct Queue my_queue = {empty, NULL, 0};  // in my queue implementation first member is empty
 
     pthread_mutex_lock(&mutex);
@@ -207,7 +207,7 @@ void *server_function(void *arg){
                 // do processing
                 snprintf(logtext, sizeof(logtext), "Server %d starting to process request %s.", my_id, request);
                 wlog(logtext);
-                char response[100];
+                char response[100] = "\0";
                 process(request, &bank, response, &barrier);
                 wlog(response);
                 send(client_socket, response, sizeof(response), 0);

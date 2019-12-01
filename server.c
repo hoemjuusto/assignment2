@@ -13,61 +13,66 @@
 #include "server.h"
 #include "account.h"
 
-
+pthread_rwlock_t  rwlock = PTHREAD_RWLOCK_INITIALIZER;
 
 static int account_exists(struct Bank *bank, char *id){
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_mutex_lock(&mutex);
+
+    // Reader gets the lock, no writing operations possible
+    pthread_rwlock_rdlock(&rwlock);
+
     for (int i = 0; bank->accounts[i] != NULL; i++) {
         if (strcmp(bank->accounts[i]->id, id) == 0) {
-            pthread_mutex_unlock(&mutex);
+            pthread_rwlock_unlock(&rwlock);
             return i;
         }
     }
-    pthread_mutex_unlock(&mutex);
+    // reader lock unlocked, writing possible again
+    pthread_rwlock_unlock(&rwlock);
     return -1;
 }
 
 int create_account(struct Bank *bank, char *id, float init_balance){
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_mutex_lock(&mutex);
+
     if(account_exists(bank, id) != -1){
         printf("Account with id %s already exists!\n", id);
-        pthread_mutex_unlock(&mutex);
         return -1;
     }
     int i = 0;
+    pthread_rwlock_rdlock(&rwlock);
     for (i = 0; bank->accounts[i] != NULL; i++);
+    pthread_rwlock_unlock(&rwlock);
     struct Account *new_account = malloc(sizeof(struct Account));
     strcpy(new_account->id, id);
     new_account->balance=init_balance;
+
+    // if thread comes here it acquires write lock, so any other attempts to get read/write lock are denied
+    pthread_rwlock_wrlock(&rwlock);
     bank->accounts = realloc(bank->accounts, sizeof(struct Account *)*(i + 1) + sizeof(NULL));
     if(bank->accounts == NULL){
         fprintf(stderr, "Failed to reallocate when creating new account!\n");
-        pthread_mutex_unlock(&mutex);
         return -1;
     }
     bank->accounts[i] = new_account;
     bank->accounts[i + 1] = NULL;
-    printf("New account with id: %s and initial balance: %.2f created!\n", bank->accounts[i]->id, init_balance);
-    pthread_mutex_unlock(&mutex);
+    // writer lock unlocked
+    pthread_rwlock_unlock(&rwlock);
+    printf("New account with id: %s and initial balance: %.2f created!\n", id, init_balance);
     return 1;
 }
 
 static int print_account_balance(struct Bank *bank, char *id, char *response_buffer) {
 
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_mutex_lock(&mutex);
+    pthread_rwlock_rdlock(&rwlock);
     int account_index = account_exists(bank, id);
     if(account_index == -1) {
         printf("No such account created!\n");
         snprintf(response_buffer, 100, "No account with id %s created!\n", id);
-        pthread_mutex_unlock(&mutex);
+        pthread_rwlock_unlock(&rwlock);
         return 0;
     }
     printf("Account id: %s, balance: %f\n", bank->accounts[account_index]->id, bank->accounts[account_index]->balance);
     snprintf(response_buffer, 100, "Account id: %s, balance: %f\n", bank->accounts[account_index]->id, bank->accounts[account_index]->balance);
-    pthread_mutex_unlock(&mutex);
+    pthread_rwlock_unlock(&rwlock);
     return 1;
 
 

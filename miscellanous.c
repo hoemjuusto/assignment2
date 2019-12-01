@@ -29,23 +29,24 @@ void min(struct Queue **sqs, int *min_value, int *min_index){
 }
 
 void wlog(const char *logtext){
+    if(logtext[0] != '\0') {
+        char filepath[] = "logfile.log";
+        FILE *f = fopen(filepath, "a");
 
-    char filepath[] = "logfile.log";
-    FILE *f = fopen(filepath, "a");
+        if (-1 == dup2(fileno(f), fileno(stderr))) { perror("cannot redirect stderr"); }
 
-    if (-1 == dup2(fileno(f), fileno(stderr))) { perror("cannot redirect stderr");}
+        char buff[20];
+        struct tm *sTm;
 
-    char buff[20];
-    struct tm *sTm;
+        time_t now = time(0);
+        sTm = gmtime(&now);
 
-    time_t now = time (0);
-    sTm = gmtime (&now);
+        strftime(buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
 
-    strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
-
-    char id[] = "<server>";
-    fprintf(f, "%s %s %s\n", buff, id, logtext);
-    fflush(f);
-    fclose(f);
+        char id[] = "<server>";
+        fprintf(f, "%s %s %s\n", buff, id, logtext);
+        fflush(f);
+        fclose(f);
+    }
 }
 
